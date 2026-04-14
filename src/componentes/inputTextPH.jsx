@@ -1,13 +1,15 @@
 
-const inputTextPH = ({ label, nom, placeholder }) => {
+const inputTextPH = ({ label, name, placeholder, value, onChange }) => {
   return (
     <>
       <label>{label}</label>
       <input 
         type="text" 
-        nom={nom} 
+        name={name} 
         className="u-full-width" 
-        placeholder={placeholder} 
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
     </>
   );

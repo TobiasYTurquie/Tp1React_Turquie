@@ -1,9 +1,10 @@
 import Form from './componentes/Form';
 import ListaCitas from './componentes/ListaCitas';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
-  const TodasLasCitas = [
+  const [citas, setCitas] = useState([
     {
       mascota: 'Nina',
       dueño: 'Martin',
@@ -25,7 +26,17 @@ function App() {
       hora: '16:15',
       sintomas: 'No está comiendo'
     }
-  ];
+  ]);
+
+  const agregarCita = (nuevaCita) => {
+    setCitas([...citas, nuevaCita]);
+  };
+
+  const eliminarCita = (index) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar esta cita?')) {
+      setCitas(citas.filter((_, i) => i !== index));
+    }
+  };
 
   return (
     <>
@@ -34,10 +45,10 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="one-half column">
-            <Form />
+            <Form onAgregarCita={agregarCita} />
           </div>
           <div className="one-half column">
-            <ListaCitas TodasLasCitas={TodasLasCitas} />
+            <ListaCitas citas={citas} onEliminarCita={eliminarCita} />
           </div>
         </div>
       </div>
